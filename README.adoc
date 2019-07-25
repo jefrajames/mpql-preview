@@ -5,7 +5,7 @@ This project aims at providing a preview of the future Eclipse MicroProfile Grap
 
 If you don't know what MicroProfile GraphQL is about, please have a look on https://github.com/eclipse/microprofile-graphql[GitHub]. In short, it aims at making GraphQL a first-class citizen of the MicroProfile platform to develop modern APIs. 
 
-GraphQL is a https://graphql.github.io/graphql-spec/[specification], initiated by FaceBook, and hosted by the Linux Foundation since Nov. 2018. It provides a lot of flexibility on the client-side and is particularly relevant for data-oriented API.
+GraphQL is a https://graphql.github.io/graphql-spec/[specification], initiated by FaceBook, and hosted by the Linux Foundation since Nov. 2018. It provides a lot of flexibility on the client-side and is particularly relevant for data-oriented APIs.
 
 To know more about GraphQL in general, please follow this excellent tutorial from Bojan Tomic: https://www.howtographql.com/graphql-java/0-introduction/[graphql-java Tutorial].
 
@@ -23,7 +23,7 @@ The project is still under development, but you can already give it a try:
 
 So everything is in place to play around with it, except that complete MicroProfile GraphQL implementations are not yet available. And this is precisely what this project is about!
 
-== What is this preview project?
+== What is this preview project about?
 This project is made of 3 parts:
 
 . a SuperHero demo application,
@@ -72,7 +72,7 @@ The war file containing the SuperHero application is fully Java/Jakarta EE 8 com
 . Wildfly 16.0.0.Final.
 
 
-=== Playing with GraphQL
+=== Playing around with GraphQL
 
 Once the application started, http://localhost:8080/mpql-preview/[go to the index page] which offers two options:
 
@@ -81,7 +81,7 @@ Once the application started, http://localhost:8080/mpql-preview/[go to the inde
 
 If your are not familiar with GraphQL syntax, you can copy-paste those used by the tests defined in graphql-config.properties:
 
-To retrieve all heros:
+To retrieve all heroes:
 [source,]
 ----
 query allHeroes {
@@ -94,7 +94,7 @@ query allHeroes {
 }
 ----
 
-To retrieve heros belonging to the Avengers team:
+To retrieve heroes belonging to the Avengers team:
 [source,]
 ----
 query allAvengers {
@@ -121,4 +121,4 @@ mutation createNewHero {
 
 There are also alternatives to use variables in queries and mutations.
 
-Hope this helps, enjoy!
+Hope this helps, enjoy and stay tuned with MicroProfile GraphQL!
