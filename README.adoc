@@ -1,0 +1,124 @@
+= Microprofile GraphQL preview
+
+== Objectives
+This project aims at providing a preview of the future Eclipse MicroProfile GraphQL specification.
+
+If you don't know what MicroProfile GraphQL is about, please have a look on https://github.com/eclipse/microprofile-graphql[GitHub]. In short, it aims at making GraphQL a first-class citizen of the MicroProfile platform to develop modern APIs. 
+
+GraphQL is a https://graphql.github.io/graphql-spec/[specification], initiated by FaceBook, and hosted by the Linux Foundation since Nov. 2018. It provides a lot of flexibility on the client-side and is particularly relevant for data-oriented API.
+
+To know more about GraphQL in general, please follow this excellent tutorial from Bojan Tomic: https://www.howtographql.com/graphql-java/0-introduction/[graphql-java Tutorial].
+
+== Status of Eclipse MicroProfile GraphQL
+
+MicroProfile GraphQL is an Eclipse project, started in December 2018, to define a standard API for GraphQL applications following a code-first approach. "Code-first" means that the GraphQL schema is not defined upfront, but is derived from the Java code at application startup.
+
+The current API is made of a set of https://github.com/eclipse/microprofile-graphql/tree/master/api/src/main/java/org/eclipse/microprofile/graphql[a set of annotations].
+
+The project is still under development, but you can already give it a try:
+
+. the project is available on  https://github.com/eclipse/microprofile-graphql[GitHub],
+. the API has been published https://mvnrepository.com/artifact/org.eclipse.microprofile.graphql/microprofile-graphql-api[on Maven Central],
+. a first prototype implementation is provided by spqr. It is available on GitHub https://github.com/leangen/graphql-spqr/tree/microprofile-proto[in the microprofile-proto branch].
+
+So everything is in place to play around with it, except that complete MicroProfile GraphQL implementations are not yet available. And this is precisely what this project is about!
+
+== What is this preview project?
+This project is made of 3 parts:
+
+. a SuperHero demo application,
+. a runner based on a CDI extension which makes the glue between the SuperHero application and the spqr implementation.This glue is required since real 
+MicroProfile GraphQL implementations are still under development. IBM, RedHat and Tomitribe are activelly working on it. A Servlet is also defined in the runner to ensure the HTTP transport,
+. a basic GraphQL client to run the tests.
+
+It has been developped as a Java EE Web application using Payara-5.192. It can run on any Java EE 8 platform.
+
+
+
+== Building and running the project
+
+=== Preambles
+
+First off, you need to have a JDK (>=8) and Maven (3.5) installed.
+
+More precisely, this project has been developped with:
+
+. Maven 3.6.1,
+. OpenJDK 11.0.3 with OpenJ9.
+
+
+=== Building the project
+
+The following steps must be achieved:
+
+. clone this project,
+. clone spqr microprofile-proto branch from GitHub  https://github.com/leangen/graphql-spqr/tree/microprofile-proto[in the microprofile-proto branch],
+. build and install it locally (not available on Maven central),
+. download https://www.payara.fish/software/downloads/[Payara 5.192],
+. start Payara: _asadmin start-domain domain1_ (required for the tests),
+. build the project with Maven,
+. once the war file is generated, you are free to use your favorite IDE to change the source code or the application server.
+
+If you change the code, beware that at least one @GraphQLApi class is expected to start the application.
+
+
+=== Running
+
+The war file containing the SuperHero application is fully Java/Jakarta EE 8 compliant and can be deployed and run on any application server. It has been tested on:
+
+. GlassFish 5.1,
+. OpenLiberty 19.0.5,
+. TomEE plus 8.0.0-M2,
+. Wildfly 16.0.0.Final.
+
+
+=== Playing with GraphQL
+
+Once the application started, http://localhost:8080/mpql-preview/[go to the index page] which offers two options:
+
+. **introspect the GraphQL schema**: this is a key concept of GraphQL, acting as a contract between the server and the clients. BTW, note that GraphQL provides native introspection,
+. *play with GraphiQL* to interract with the SuperHero application. https://github.com/graphql/graphiql[GraphiQL] is an interactive javascript-based tool enabling to send queries and mutations from your browser.
+
+If your are not familiar with GraphQL syntax, you can copy-paste those used by the tests defined in graphql-config.properties:
+
+To retrieve all heros:
+[source,]
+----
+query allHeroes {
+  allHeroes {
+    name
+    primaryLocation
+    superPowers
+    realName
+  }
+}
+----
+
+To retrieve heros belonging to the Avengers team:
+[source,]
+----
+query allAvengers {
+  allHeroesInTeam(team: "Avengers") {
+    name
+    primaryLocation
+    superPowers
+  }
+}
+----
+
+To create a new hero in the Avengers team with given super powers:
+[source,]
+----
+mutation createNewHero {
+  createNewHero(hero: {name: "Captain America", realName: "Steven Rogers", superPowers: ["Super strength", "Vibranium Shield"], primaryLocation: "New York, NY", teamAffiliations: [{name: "Avengers"}]}) {
+    name
+    primaryLocation
+    superPowers
+    realName
+  }
+}
+----
+
+There are also alternatives to use variables in queries and mutations.
+
+Hope this helps, enjoy!

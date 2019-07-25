@@ -1,0 +1,30 @@
+[
+ {
+  "name":"Iron Man",
+  "realName":"Tony Stark",
+  "primaryLocation":"Los Angeles, CA",
+  "superPowers":["wealth","engineering"],
+  "teamAffiliations":[{"name":"Avengers"}]
+ },
+ {
+  "name":"Spider Man",
+  "realName":"Peter Parker",
+  "primaryLocation":"New York, NY",
+  "superPowers":["Spidey Sense","Wall-Crawling","Super Strength","Web-shooting"],
+  "teamAffiliations":[{"name":"Avengers"}]
+ },
+ {
+  "name":"Starlord",
+  "realName":"Peter Quill",
+  "primaryLocation":"Outer Space",
+  "superPowers":["Ingenuity","Humor","Dance moves"],
+  "teamAffiliations":[{"name":"Guardians of the Galaxy"}]
+ },
+ {
+  "name":"Wolverine",
+  "realName":"James Howlett, aka Logan",
+  "primaryLocation":"Unknown",
+  "superPowers":["Regeneritive Healing","Enhanced Reflexes","Adamantium-infused skeleton","Retractable claws"],
+  "teamAffiliations":[{"name":"Avengers"},{"name":"X-Men"}]
+ }
+]
